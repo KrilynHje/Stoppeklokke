@@ -29,6 +29,9 @@
             var minutes;
             var hours;
             var displayTime;
+            var laptimeTotal;
+            
+
 
 
             function startStopwatch() {
@@ -62,15 +65,24 @@
                 displayTime = pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
                 document.getElementById("stopwatch").innerHTML = displayTime;
 
-
-
             }
 
             function lapStopwatch() {
-                var lapTime = displayTime;
-                document.getElementById("lap").innerHTML += /*HTML*/ ` <div> ${lapTime}</div> `;
+                if (laptime == null){
+
+                 var laptime =Math.floor(elapsedTime / 1000) % 60;
+
+                }  
+                
+                
+
+                // laptime = elapsedTime / 1000;
+
+                document.getElementById("lap").innerHTML += /*HTML*/ ` <div> ${laptime}</div> `;
 
             }
+
+
 
             function pad(number) {
 
