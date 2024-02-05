@@ -31,8 +31,12 @@
             var milliSec;
             var displayTime;
             var allLapsTime = 0;
+
+          
             
-                   
+            
+
+
 
 
 
@@ -52,6 +56,8 @@
             function resetStopwatch() {
                 stopStopwatch();
                 elapsedPausedTime = 0;
+                allLapsTime = 0;
+                lapTime = 0;
                 document.getElementById("stopwatch").innerHTML = "00:00:00";
                 document.getElementById("lap").innerHTML = " ";
             }
@@ -68,21 +74,21 @@
             }
 
             function lapStopwatch() {
-                
+
                 var lapTime = elapsedTime - allLapsTime;
                 allLapsTime += lapTime;
-                
+
                 var milliSec2 = Math.floor(lapTime * 1000) % 100;
                 var seconds2 = Math.floor(lapTime / 1000) % 60;
                 var minutes2 = Math.floor(lapTime / 1000 / 60) % 60;
                 var hours2 = Math.floor(lapTime / 1000 / 60 / 60);
                 var displayTime2 = pad(minutes2) + ":" + pad(seconds2) + "" + pad(milliSec2);
-                
-                document.getElementById("lap").innerHTML+= /*HTML*/ ` <div> ${displayTime2}</div> `;
+
+                document.getElementById("lap").innerHTML += /*HTML*/ ` <div> ${displayTime2}</div> `;
 
             }
-        
-            
+
+
             function pad(number) {
 
                 return (number < 10 ? "0" : "") + number;
