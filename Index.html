@@ -28,16 +28,18 @@
             var seconds;
             var minutes;
             var hours;
+            var milliSec;
             var displayTime;
-            var laptimeTotal;
+            var allLapsTime = 0;
             
+                   
 
 
 
             function startStopwatch() {
                 if (!stopwatchInterval) {
                     startTime = new Date().getTime() - elapsedPausedTime;
-                    stopwatchInterval = setInterval(updateStopwatch, 1000);
+                    stopwatchInterval = setInterval(updateStopwatch, 1000) % 100;
                 }
             }
 
@@ -52,38 +54,35 @@
                 elapsedPausedTime = 0;
                 document.getElementById("stopwatch").innerHTML = "00:00:00";
                 document.getElementById("lap").innerHTML = " ";
-
-
             }
 
             function updateStopwatch() {
                 currentTime = new Date().getTime();
                 elapsedTime = currentTime - startTime;
+                milliSec = Math.floor(elapsedTime * 1000) % 100;
                 seconds = Math.floor(elapsedTime / 1000) % 60;
                 minutes = Math.floor(elapsedTime / 1000 / 60) % 60;
                 hours = Math.floor(elapsedTime / 1000 / 60 / 60);
-                displayTime = pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
+                displayTime = pad(minutes) + ":" + pad(seconds) + ":" + pad(milliSec);
                 document.getElementById("stopwatch").innerHTML = displayTime;
-
             }
 
             function lapStopwatch() {
-                if (laptime == null){
-
-                 var laptime =Math.floor(elapsedTime / 1000) % 60;
-
-                }  
                 
+                var lapTime = elapsedTime - allLapsTime;
+                allLapsTime += lapTime;
                 
-
-                // laptime = elapsedTime / 1000;
-
-                document.getElementById("lap").innerHTML += /*HTML*/ ` <div> ${laptime}</div> `;
+                var milliSec2 = Math.floor(lapTime * 1000) % 100;
+                var seconds2 = Math.floor(lapTime / 1000) % 60;
+                var minutes2 = Math.floor(lapTime / 1000 / 60) % 60;
+                var hours2 = Math.floor(lapTime / 1000 / 60 / 60);
+                var displayTime2 = pad(minutes2) + ":" + pad(seconds2) + "" + pad(milliSec2);
+                
+                document.getElementById("lap").innerHTML+= /*HTML*/ ` <div> ${displayTime2}</div> `;
 
             }
-
-
-
+        
+            
             function pad(number) {
 
                 return (number < 10 ? "0" : "") + number;
