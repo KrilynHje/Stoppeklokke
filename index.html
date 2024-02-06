@@ -50,6 +50,7 @@
                 stopwatchInterval = null;
             }
 
+
             function resetStopwatch() {
                 stopStopwatch();
                 elapsedPausedTime = 0;
@@ -82,7 +83,7 @@
                 var displayTime2 = pad(minutes2) + ":" + pad(seconds2) + "" + pad(milliSec2);
 
                 document.getElementById("lap").innerHTML += /*HTML*/ ` <div> ${displayTime2}</div> `;
-
+                
             }
 
 
